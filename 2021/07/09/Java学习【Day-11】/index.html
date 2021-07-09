@@ -1,70 +1,141 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
   
+  <title>Java学习【Day 11】 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="[TOC]
+序列化参与序列化和反序列化的对象，必须实现Serializable接口，Serializable接口只是一个标志接口。java虚拟机看到这个接口后，会为该类自动生成一个序列化版本号
+序列化的实现：
+12345678910111213141516171819202122package Demo;import java.io.FileOutputStream;import java.io.ObjectOutputStream;public class ObjectOutputStream1 &amp;#123;    public static void main(String[] args) throws Exception &amp;#123;        //创建User对象        User user = new User(&amp;quot;DMIND&amp;quot;,new Address(&amp;quot;GD&amp;quot;,&amp;quot;Street-13&amp;quot;,&amp;quot;123&amp;quot;));        //序列化对象        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(&amp;quot;userinfo&amp;quot;));        //序列化        oos.writeObject(user);        //刷新        oos.flush();        oos.close();    &amp;#125;&amp;#125;
+反序列化12345678910111213141516package Demo;import java.io.FileInputStream;import java.io.IOException;import java.io.ObjectInputStream;public class ObjectOutputStream2 &amp;#123;    public static void main(String[] args) throws IOException, ClassNotFoundException &amp;#123;        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(&amp;quot;userinfo&amp;quot;));        Object obj = ois.readObject();        System.out.println(obj);        ois.close();    &amp;#125;&amp;#125;
+序列化、反序列化多个对象序列化：
+1234567891011121314151617181920212223242526package Demo;import java.io.*;import java.util.ArrayList;import java.util.List;/** * 序列化存储多个对象，利用集合，对集合进行序列化与反序列化 */public class ObjectOutputStream2 &amp;#123;    public static void main(String[] args) throws IOException &amp;#123;        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(&amp;quot;userinfo&amp;quot;));        //创建集合        List&amp;lt;User&amp;gt; userList = new ArrayList&amp;lt;&amp;gt;();        //集合中放入多个对象        userList.add(new User(&amp;quot;DMIND&amp;quot;,new Address(&amp;quot;GD&amp;quot;,&amp;quot;13&amp;quot;,&amp;quot;123&amp;quot;)));        userList.add(new User(&amp;quot;TAO&amp;quot;,new Address(&amp;quot;GD&amp;quot;,&amp;quot;14&amp;quot;,&amp;quot;123&amp;quot;)));        userList.add(new User(&amp;quot;zhangsan&amp;quot;,new Address(&amp;quot;GD&amp;quot;,&amp;quot;15&amp;quot;,&amp;quot;123&amp;quot;)));        //序列化一个集合，这个集合对象中放入许多其他对象        oos.writeObject(userList);        oos.flush();        oos.close();    &amp;#125;&amp;#125;"> 
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>
-    Java学习【Day 11】 |
-    
-    Hexo</title>
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+
+  <meta property="og:title" content="Java学习【Day 11】"/>
+  <meta property="og:site_name" content="Hexo"/>
 
   
-<link rel="stylesheet" href="/css/technology.css">
-
+    <meta property="og:image" content=""/>
   
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
   
   
-<script src="/js/pace.min.js"></script>
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
 
 <meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
 </head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <section class="outer">
-  <article id="post-Java学习【Day-11】" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Java学习【Day 11】
-    </h1>
-  
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2021/07/09/Java%E5%AD%A6%E4%B9%A0%E3%80%90Day-11%E3%80%91/" class="article-date">
-  <time datetime="2021-07-09T11:24:51.000Z" itemprop="datePublished">2021-07-09</time>
-</a>
-        
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Hexo</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
       </div>
-    
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
 
-    <div class="article-entry" itemprop="articleBody">
-      
+  <div class="container">
+  	<div class="content">
+    	 
 
-      
 
-      
-        <p>@[toc]</p>
+	
+		<div class="page-header">
+			<h1> Java学习【Day 11】</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>[TOC]</p>
 <h4 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h4><p>参与序列化和反序列化的对象，必须实现<code>Serializable</code>接口，<code>Serializable</code>接口只是一个标志接口。java虚拟机看到这个接口后，会为该类自动生成一个序列化版本号</p>
 <p>序列化的实现：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectOutputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ObjectOutputStream1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//创建User对象</span></span><br><span class="line">        User user = <span class="keyword">new</span> User(<span class="string">&quot;DMIND&quot;</span>,<span class="keyword">new</span> Address(<span class="string">&quot;GD&quot;</span>,<span class="string">&quot;Street-13&quot;</span>,<span class="string">&quot;123&quot;</span>));</span><br><span class="line">        <span class="comment">//序列化对象</span></span><br><span class="line">        ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="string">&quot;userinfo&quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//序列化</span></span><br><span class="line">        oos.writeObject(user);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//刷新</span></span><br><span class="line">        oos.flush();</span><br><span class="line"></span><br><span class="line">        oos.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -89,63 +160,182 @@
 <p><img src="https://img-blog.csdnimg.cn/20210630083808408.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTY2OTIwNQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">获取线程的名字</span><br><span class="line">t.getName();    <span class="comment">//Thread-0</span></span><br><span class="line"></span><br><span class="line">设置线程的名字</span><br><span class="line">t.setName(<span class="string">&quot;new Name&quot;</span>);</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/07/09/Java%E5%AD%A6%E4%B9%A0%E3%80%90Day-11%E3%80%91/" data-id="ckqw9axpo0001mgv94jou979d"
-         class="article-share-link">分享</a>
-      
-    </footer>
+	  <div class="article-footer-copyright">
 
-  </div>
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
 
-  
+	</div>
+
+	
+	<span id="/2021/07/09/Java%E5%AD%A6%E4%B9%A0%E3%80%90Day-11%E3%80%91/" class="leancloud-visitors view" data-flag-title="Java学习【Day 11】">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
     
-  <nav class="article-nav">
     
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
     
-      <a href="/2021/07/09/My-Fitst-Post/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">My Fitst Post</div>
-      </a>
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
     
-  </nav>
-
-
-  
-
-  
+    <a href="/2021/07/09/My-Fitst-Post/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
     
-  
 
-</article>
+    
+</div>
 
 
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">Comments</h2>
 
+    
 </section>
-    </div>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"xxx","appKey":"xxx","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2021-07-09 
+	</div>
+	
+
+	<!-- categories -->
     
-<script src="/js/jquery-2.0.3.min.js"></script>
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/这里是分类/">这里是分类<span>1</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/这里是标签/">这里是标签<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
 
 
-<script src="/js/lazyload.min.js"></script>
 
-
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
-
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2021 John Doe's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
 
 
 
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
 
-
-
-<script src="/js/technology.js"></script>
-
-
-  </div>
 </body>
-</html>
+   </html>
